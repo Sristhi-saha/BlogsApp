@@ -93,7 +93,7 @@ function BlogOverview() {
     }
 
     useEffect(() => {
-        getAllData();
+        getAllData();//we can call router.refresh() when chnage anything refresh hbee okeee!!!!
     }, [])
 
     return (
@@ -155,28 +155,31 @@ function BlogOverview() {
             </div>
             <div>
                 {
-                    allBlog ? allBlog.map((item, index) => {
-                        return (
-                            <ul className="p-4">
-                                <li className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 hover:shadow-xl transition duration-300">
-                                    <h2 className="text-xl font-bold text-gray-800 mb-2">
-                                        {item.title}
-                                    </h2>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex gap-4 mt-4">
-                                        <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"onClick={()=>handleDelete(item._id)}>
-                                            Delete
-                                        </button>
-
-                                        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"onClick={()=>{updateData(item)}}>
-                                            Edit
-                                        </button>
-                                    </div>
-                                </li>
-                            </ul>)
-                    }) : null
+                   <ul className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {allBlog.map((item) => (
+    <li
+      key={item._id}
+      className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 hover:shadow-xl transition duration-300"
+    >
+      <h2 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h2>
+      <p className="text-gray-600 leading-relaxed">{item.description}</p>
+      <div className="flex gap-4 mt-4">
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"
+          onClick={() => handleDelete(item._id)}
+        >
+          Delete
+        </button>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+          onClick={() => updateData(item)}
+        >
+          Edit
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
                 }
             </div>
         </div>
